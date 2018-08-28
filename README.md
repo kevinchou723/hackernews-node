@@ -1,5 +1,7 @@
 # GraphQL server with graphql-yoga and Prisma
 
+A lot of comments and notes are still work in progress
+
 This Repo was based on the tutorial from [howtographql](https://www.howtographql.com/graphql-js/0-introduction/)
 
 ## List of dependencies to install
