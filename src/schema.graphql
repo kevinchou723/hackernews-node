@@ -1,0 +1,37 @@
+# import Link, LinkSubscriptionPayload, LinkOrderByInput, Vote, VoteSubscriptionPayload from "./generated/prisma.graphql"
+
+type Query {
+  info: String!
+  feed(filter: String, skip: Int, first: Int, orderyBy: LinkOrderByInput): Feed! #skip is start index, first is limit
+}
+
+type Mutation {
+  post(url: String!, description: String!): Link!
+  signup(email: String!, password: String!, name: String!): AuthPayload
+  login(email: String!, password: String!): AuthPayload
+  vote(linkId: ID!): Vote
+}
+
+type Subscription {
+  newLink: LinkSubscriptionPayload
+  newVote: VoteSubscriptionPayload
+}
+
+type AuthPayload {
+  token: String
+  user: User
+}
+
+# Although we can import User type from generated prisma schema, we are defining it here
+# to hide certain information on User, such as password. Now client can directly query it
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  links: [Link!]!
+}
+
+type Feed {
+  links: [Link!]!
+  count: Int!
+}
